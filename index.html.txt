@@ -1,0 +1,299 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Alborada, chocolates artesanales creados para despertar sentimientos.">
+    <title>Alborada | Chocolate que despierta sentimientos</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="estilos.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <header class="encabezado">
+        <a href="#inicio" class="logo">ALBORADA<span>.</span></a>
+
+        <nav class="navegacion">
+            <a href="#inicio">Inicio</a>
+            <a href="#productos">Productos</a>
+            <a href="#rellenos">Rellenos</a>
+            <a href="#pedidos">Pedidos</a>
+        </nav>
+
+        <a class="boton boton-dorado" href="#pedidos">Haz tu pedido</a>
+    </header>
+
+    <main>
+        <section class="hero" id="inicio">
+            <div class="hero-contenido">
+                <p class="etiqueta">CHOCOLATERÍA ARTESANAL</p>
+                <h1>Hay sentimientos que merecen <em>chocolate.</em></h1>
+                <p class="hero-texto">
+                    Creamos detalles artesanales para convertir momentos
+                    especiales en recuerdos inolvidables.
+                </p>
+                <a class="boton boton-dorado" href="#productos">Descubrir productos</a>
+                <a class="enlace-simple" href="#pedidos">Personaliza tu regalo ↗</a>
+            </div>
+
+            <div class="hero-visual">
+                <div class="hero-circulo">
+                    <span class="hero-simbolo">♡</span>
+                    <p>Hecho con amor</p>
+                    <span>ALBORADA · CHOCOLATE ARTESANAL</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="seccion momentos">
+            <p class="etiqueta">PEQUEÑOS DETALLES, GRANDES EMOCIONES</p>
+            <h2>Un regalo puede decirlo todo.</h2>
+            <p>
+                Para enamorar, agradecer, celebrar o simplemente recordarle
+                a alguien lo importante que es para ti.
+            </p>
+        </section>
+
+        <section class="seccion catalogo" id="productos">
+            <div class="encabezado-seccion">
+                <div>
+                    <p class="etiqueta">NUESTRA COLECCIÓN</p>
+                    <h2>Creaciones Alborada</h2>
+                </div>
+                <p>Cada detalle está pensado para sorprender.</p>
+            </div>
+
+            <div class="productos-grid">
+
+                <article class="producto">
+                    <div class="producto-imagen imagen-1"><span>♡</span></div>
+                    <div class="producto-info">
+                        <p class="producto-categoria">CHOCOLATES</p>
+                        <h3>Chocorazones diseñados con relleno especial</h3>
+                        <p class="precio">$86.000 COP</p>
+                        <button class="boton-producto" data-producto="Chocorazones diseñados con relleno especial">Pedir producto ↗</button>
+                    </div>
+                </article>
+
+                <article class="producto">
+                    <div class="producto-imagen imagen-2"><span>✿</span></div>
+                    <div class="producto-info">
+                        <p class="producto-categoria">REGALO ESPECIAL</p>
+                        <h3>Caja de vino, chocolates con relleno y rosas</h3>
+                        <p class="precio">$95.000 COP</p>
+                        <button class="boton-producto" data-producto="Caja de vino, chocolates con relleno y rosas">Pedir producto ↗</button>
+                    </div>
+                </article>
+
+                <article class="producto">
+                    <div class="producto-imagen imagen-3"><span>❦</span></div>
+                    <div class="producto-info">
+                        <p class="producto-categoria">REGALO ESPECIAL</p>
+                        <h3>Caja de vino y chocolates con relleno</h3>
+                        <p class="precio">$85.000 COP</p>
+                        <button class="boton-producto" data-producto="Caja de vino y chocolates con relleno">Pedir producto ↗</button>
+                    </div>
+                </article>
+
+                <article class="producto">
+                    <div class="producto-imagen imagen-4"><span>♥</span></div>
+                    <div class="producto-info">
+                        <p class="producto-categoria">FRESAS</p>
+                        <h3>Caja con 6 chocofresas diseñadas</h3>
+                        <p class="precio">$69.000 COP</p>
+                        <button class="boton-producto" data-producto="Caja con 6 chocofresas diseñadas">Pedir producto ↗</button>
+                    </div>
+                </article>
+
+                <article class="producto">
+                    <div class="producto-imagen imagen-5"><span>○</span></div>
+                    <div class="producto-info">
+                        <p class="producto-categoria">CREACIONES</p>
+                        <h3>Donas de chocolate con relleno especial</h3>
+                        <p class="precio">$96.000 COP</p>
+                        <button class="boton-producto" data-producto="Donas de chocolate con relleno especial">Pedir producto ↗</button>
+                    </div>
+                </article>
+
+                <article class="producto">
+                    <div class="producto-imagen imagen-6"><span>♡</span></div>
+                    <div class="producto-info">
+                        <p class="producto-categoria">CHOCOLATES</p>
+                        <h3>Par de chocorazones grandes diseñados</h3>
+                        <p class="precio">$72.000 COP</p>
+                        <button class="boton-producto" data-producto="Par de chocorazones grandes diseñados">Pedir producto ↗</button>
+                    </div>
+                </article>
+
+                <article class="producto">
+                    <div class="producto-imagen imagen-7"><span>✿</span></div>
+                    <div class="producto-info">
+                        <p class="producto-categoria">ANCHETAS</p>
+                        <h3>Ancheta con rosas, vino pequeño y 9 chocolates</h3>
+                        <p class="precio">$110.000 COP</p>
+                        <button class="boton-producto" data-producto="Ancheta con rosas, vino pequeño y 9 chocolates">Pedir producto ↗</button>
+                    </div>
+                </article>
+
+                <article class="producto">
+                    <div class="producto-imagen imagen-8"><span>❀</span></div>
+                    <div class="producto-info">
+                        <p class="producto-categoria">ANCHETAS</p>
+                        <h3>Ancheta pequeña con fresas, vino y caja de madera</h3>
+                        <p class="precio">$110.000 COP</p>
+                        <button class="boton-producto" data-producto="Ancheta pequeña con fresas, vino y caja de madera">Pedir producto ↗</button>
+                    </div>
+                </article>
+
+                <article class="producto">
+                    <div class="producto-imagen imagen-9"><span>♡</span></div>
+                    <div class="producto-info">
+                        <p class="producto-categoria">ANCHETAS</p>
+                        <h3>Ancheta con 2 corazones, fresas y base de madera</h3>
+                        <p class="precio">$99.000 COP</p>
+                        <button class="boton-producto" data-producto="Ancheta con 2 corazones, fresas y base de madera">Pedir producto ↗</button>
+                    </div>
+                </article>
+
+                <article class="producto">
+                    <div class="producto-imagen imagen-10"><span>✧</span></div>
+                    <div class="producto-info">
+                        <p class="producto-categoria">REGALO PREMIUM</p>
+                        <h3>Bandeja decorada con vino, café, arequipe y oso</h3>
+                        <p class="precio">$220.000 COP</p>
+                        <button class="boton-producto" data-producto="Bandeja decorada con vino, café, arequipe y oso">Pedir producto ↗</button>
+                    </div>
+                </article>
+
+                <article class="producto">
+                    <div class="producto-imagen imagen-11"><span>❦</span></div>
+                    <div class="producto-info">
+                        <p class="producto-categoria">REGALO PREMIUM</p>
+                        <h3>Ancheta con rosas eternas y caja de chocolate en madera</h3>
+                        <p class="precio">$129.000 COP</p>
+                        <button class="boton-producto" data-producto="Ancheta con rosas eternas y caja de chocolate en madera">Pedir producto ↗</button>
+                    </div>
+                </article>
+
+                <article class="producto">
+                    <div class="producto-imagen imagen-12"><span>✝</span></div>
+                    <div class="producto-info">
+                        <p class="producto-categoria">DETALLES ESPECIALES</p>
+                        <h3>Ancheta con yeso de la Virgen y rosas eternas</h3>
+                        <p class="precio">$149.000 COP</p>
+                        <button class="boton-producto" data-producto="Ancheta con yeso de la Virgen y rosas eternas">Pedir producto ↗</button>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <section class="seccion rellenos" id="rellenos">
+            <p class="etiqueta">UN INTERIOR INOLVIDABLE</p>
+            <h2>Elige tu relleno favorito</h2>
+            <p class="intro-seccion">Cada sabor aporta una experiencia diferente.</p>
+
+            <div class="rellenos-grid">
+                <div class="relleno"><span>01</span><p>Arequipe</p></div>
+                <div class="relleno"><span>02</span><p>Brownie</p></div>
+                <div class="relleno"><span>03</span><p>Oreo</p></div>
+                <div class="relleno"><span>04</span><p>Leche en polvo</p></div>
+                <div class="relleno"><span>05</span><p>Maracuyá</p></div>
+                <div class="relleno"><span>06</span><p>Frutos rojos</p></div>
+                <div class="relleno"><span>07</span><p>Caramelo</p></div>
+                <div class="relleno"><span>08</span><p>Avellana</p></div>
+                <div class="relleno"><span>09</span><p>Fresa</p></div>
+                <div class="relleno"><span>10</span><p>Chocolate blanco</p></div>
+                <div class="relleno"><span>11</span><p>Café</p></div>
+                <div class="relleno"><span>12</span><p>Relleno personalizado</p></div>
+            </div>
+        </section>
+
+        <section class="seccion pedidos" id="pedidos">
+            <div class="pedido-texto">
+                <p class="etiqueta">HAGAMOS ALGO ESPECIAL</p>
+                <h2>Tu próximo detalle comienza aquí.</h2>
+                <p>
+                    Cuéntanos qué te gustaría regalar. Prepararemos tu solicitud
+                    para que puedas enviarla directamente por WhatsApp.
+                </p>
+                <p class="nota-pedido">Los pedidos deben reservarse con anticipación. Consulta la disponibilidad al escribirnos.</p>
+            </div>
+
+            <form id="formulario-pedido" class="formulario">
+                <label for="nombre">Tu nombre</label>
+                <input type="text" id="nombre" name="nombre" placeholder="¿Cómo te llamas?" required>
+
+                <label for="producto">¿Qué producto deseas?</label>
+                <select id="producto" name="producto" required>
+                    <option value="">Selecciona un producto</option>
+                    <option>Chocorazones diseñados con relleno especial</option>
+                    <option>Caja de vino, chocolates con relleno y rosas</option>
+                    <option>Caja de vino y chocolates con relleno</option>
+                    <option>Caja con 6 chocofresas diseñadas</option>
+                    <option>Donas de chocolate con relleno especial</option>
+                    <option>Par de chocorazones grandes diseñados</option>
+                    <option>Ancheta con rosas, vino pequeño y 9 chocolates</option>
+                    <option>Ancheta pequeña con fresas, vino y caja de madera</option>
+                    <option>Ancheta con 2 corazones, fresas y base de madera</option>
+                    <option>Bandeja decorada con vino, café, arequipe y oso</option>
+                    <option>Ancheta con rosas eternas y caja de chocolate en madera</option>
+                    <option>Ancheta con yeso de la Virgen y rosas eternas</option>
+                    <option>Otro producto o diseño personalizado</option>
+                </select>
+
+                <div id="opcion-vino" class="campo-oculto">
+                    <label for="tamano-vino">Tamaño del vino</label>
+                    <select id="tamano-vino" name="tamano-vino">
+                        <option value="">Selecciona el tamaño</option>
+                        <option>Pequeño</option>
+                        <option>Grande</option>
+                        <option>Quiero consultar los tamaños</option>
+                    </select>
+                </div>
+
+                <label for="relleno">Relleno favorito</label>
+                <select id="relleno" name="relleno">
+                    <option value="">Selecciona un relleno (opcional)</option>
+                    <option>Arequipe</option>
+                    <option>Brownie</option>
+                    <option>Oreo</option>
+                    <option>Leche en polvo</option>
+                    <option>Maracuyá</option>
+                    <option>Frutos rojos</option>
+                    <option>Caramelo</option>
+                    <option>Avellana</option>
+                    <option>Fresa</option>
+                    <option>Chocolate blanco</option>
+                    <option>Café</option>
+                    <option>Personalizado</option>
+                </select>
+
+                <label for="comentarios">Cuéntanos tu idea</label>
+                <textarea id="comentarios" name="comentarios" rows="4" placeholder="Fecha, dedicatoria, colores o detalles adicionales..."></textarea>
+
+                <button type="submit" class="boton boton-dorado boton-enviar">Continuar por WhatsApp ↗</button>
+                <p class="aviso-formulario">Se abrirá WhatsApp con tu solicitud preparada. Debes enviarla desde allí.</p>
+            </form>
+        </section>
+    </main>
+
+    <footer class="pie">
+        <a href="#inicio" class="logo logo-pie">ALBORADA<span>.</span></a>
+        <p>Chocolate que despierta sentimientos.</p>
+        <div class="pie-enlaces">
+            <a href="https://www.instagram.com/alboradaartesanal/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="mailto:alboradaoficiala@gmail.com">Correo electrónico</a>
+            <a href="https://wa.me/573239086199" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        </div>
+        <p class="copyright">© 2026 Alborada Chocolatería Artesanal</p>
+    </footer>
+
+</body>
+</html>
