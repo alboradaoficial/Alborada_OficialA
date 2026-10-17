@@ -170,3 +170,40 @@ const elementoAnio = document.getElementById("anio");
 if (elementoAnio) {
     elementoAnio.textContent = new Date().getFullYear();
 }
+
+// ========== EFECTO AMPLIAR IMAGEN AL HACER CLIC ==========
+const visor = document.createElement('div');
+visor.className = 'visor-imagen';
+visor.innerHTML = `
+  <span class="cerrar">&times;</span>
+  <img src="" alt="Imagen ampliada">
+`;
+document.body.appendChild(visor);
+
+const imagenVisor = visor.querySelector('img');
+const botonCerrar = visor.querySelector('.cerrar');
+
+// Abrir al hacer clic en cualquier imagen de producto
+document.querySelectorAll('.producto-imagen img').forEach(img => {
+  img.style.cursor = 'zoom-in';
+  img.addEventListener('click', () => {
+    imagenVisor.src = img.src;
+    imagenVisor.alt = img.alt;
+    visor.classList.add('activo');
+    document.body.style.overflow = 'hidden'; // Bloquear desplazamiento
+  });
+});
+
+// Cerrar
+function cerrarVisor() {
+  visor.classList.remove('activo');
+  document.body.style.overflow = '';
+}
+
+botonCerrar.addEventListener('click', cerrarVisor);
+visor.addEventListener('click', (e) => {
+  if (e.target === visor) cerrarVisor();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') cerrarVisor();
+});
