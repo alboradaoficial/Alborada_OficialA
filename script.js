@@ -1,8 +1,8 @@
 
 "use strict";
 
-// Cambia este número si el WhatsApp comercial es diferente.
-// Usa el código de país y el número, sin espacios ni signos.
+// Número comercial de WhatsApp de Alborada.
+// Incluye el código de Colombia, sin espacios ni signos.
 const NUMERO_WHATSAPP = "573239086199";
 
 const formulario = document.getElementById("formulario-pedido");
@@ -11,7 +11,7 @@ const opcionVino = document.getElementById("opcion-vino");
 const selectorVino = document.getElementById("tamano-vino");
 const campoComentarios = document.getElementById("comentarios");
 
-// Mostrar el tamaño del vino cuando el producto lo incluye.
+// Actualizar el campo del vino según el producto elegido.
 function actualizarOpcionVino() {
     const producto = selectorProducto.value.toLowerCase();
     const incluyeVino = producto.includes("vino");
@@ -26,14 +26,74 @@ function actualizarOpcionVino() {
 
 selectorProducto.addEventListener("change", actualizarOpcionVino);
 
-// Seleccionar un producto desde su tarjeta.
+// Inicializar todos los carruseles de manera independiente.
+document.querySelectorAll("[data-carrusel]").forEach((carrusel) => {
+    const pista = carrusel.querySelector(".carrusel-pista");
+    const imagenes = Array.from(pista.querySelectorAll("img"));
+    const botonAnterior = carrusel.querySelector(".anterior");
+    const botonSiguiente = carrusel.querySelector(".siguiente");
+    const controles = carrusel.querySelector(".carrusel-controles");
+
+    let indiceActual = 0;
+
+    // Si solo hay una fotografía, no se necesitan controles.
+    if (imagenes.length <= 1) {
+        botonAnterior.hidden = true;
+        botonSiguiente.hidden = true;
+        controles.hidden = true;
+        return;
+    }
+
+    // Crear un punto por cada fotografía.
+    const puntos = imagenes.map((imagen, indice) => {
+        const punto = document.createElement("button");
+
+        punto.type = "button";
+        punto.className = "carrusel-punto";
+        punto.setAttribute("aria-label", "Mostrar fotografía " + (indice + 1));
+
+        punto.addEventListener("click", () => {
+            mostrarImagen(indice);
+        });
+
+        controles.appendChild(punto);
+        return punto;
+    });
+
+    function mostrarImagen(indice) {
+        indiceActual = (indice + imagenes.length) % imagenes.length;
+
+        pista.style.transform =
+            "translateX(-" + (indiceActual * 100) + "%)";
+
+        puntos.forEach((punto, posicion) => {
+            punto.classList.toggle("activo", posicion === indiceActual);
+            punto.setAttribute(
+                "aria-current",
+                posicion === indiceActual ? "true" : "false"
+            );
+        });
+    }
+
+    botonAnterior.addEventListener("click", () => {
+        mostrarImagen(indiceActual - 1);
+    });
+
+    botonSiguiente.addEventListener("click", () => {
+        mostrarImagen(indiceActual + 1);
+    });
+
+    mostrarImagen(0);
+});
+
+// Elegir un producto directamente desde su tarjeta.
 document.querySelectorAll("[data-producto]").forEach((boton) => {
     boton.addEventListener("click", () => {
         const nombreProducto = boton.dataset.producto;
         const opciones = Array.from(selectorProducto.options);
 
         const opcionEncontrada = opciones.find(
-            (opcion) => opcion.text.trim() === nombreProducto
+            (opcion) => opcion.value === nombreProducto
         );
 
         if (opcionEncontrada) {
@@ -45,6 +105,7 @@ document.querySelectorAll("[data-producto]").forEach((boton) => {
         }
 
         actualizarOpcionVino();
+
         document.getElementById("pedidos").scrollIntoView({
             behavior: "smooth"
         });
@@ -63,6 +124,12 @@ formulario.addEventListener("submit", (evento) => {
 
     if (!nombre || !producto) {
         alert("Por favor, escribe tu nombre y selecciona un producto.");
+        return;
+    }
+
+    if (producto.toLowerCase().includes("vino") && !tamanoVino) {
+        alert("Por favor, selecciona el tamaño del vino.");
+        selectorVino.focus();
         return;
     }
 
@@ -85,7 +152,10 @@ formulario.addEventListener("submit", (evento) => {
         lineas.push("*Detalles adicionales:* " + comentarios);
     }
 
-    lineas.push("", "¿Me pueden confirmar la disponibilidad y el precio final?");
+    lineas.push(
+        "",
+        "¿Me pueden confirmar la disponibilidad y el precio final?"
+    );
 
     const mensaje = encodeURIComponent(lineas.join("\n"));
     const enlaceWhatsApp =
@@ -93,3 +163,10 @@ formulario.addEventListener("submit", (evento) => {
 
     window.open(enlaceWhatsApp, "_blank", "noopener,noreferrer");
 });
+
+// Actualizar el año del pie de página.
+const elementoAnio = document.getElementById("anio");
+
+if (elementoAnio) {
+    elementoAnio.textContent = new Date().getFullYear();
+}
