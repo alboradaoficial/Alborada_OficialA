@@ -1,4 +1,4 @@
-
+```css
 :root {
     --chocolate: #3C271E;
     --chocolate-claro: #5A3A2C;
@@ -44,6 +44,10 @@ button,
 a {
     -webkit-tap-highlight-color: transparent;
 }
+
+/* =========================
+   ENCABEZADO Y LOGO SUPERIOR
+========================= */
 
 .encabezado {
     position: sticky;
@@ -97,6 +101,10 @@ a {
     color: #A16E35;
 }
 
+/* =========================
+   BOTONES
+========================= */
+
 .boton {
     display: inline-flex;
     align-items: center;
@@ -124,6 +132,10 @@ a {
     background: #E2B97F;
 }
 
+/* =========================
+   INICIO / HERO
+========================= */
+
 .hero {
     min-height: 600px;
     padding: 85px 9%;
@@ -133,7 +145,11 @@ a {
     gap: 60px;
     overflow: hidden;
     background:
-        radial-gradient(ellipse at 85% 20%, rgba(212, 167, 106, 0.15), transparent 40%),
+        radial-gradient(
+            ellipse at 85% 20%,
+            rgba(212, 167, 106, 0.15),
+            transparent 40%
+        ),
         var(--crema);
 }
 
@@ -182,53 +198,54 @@ h3 {
     font-weight: 600;
 }
 
+/* Contenedor del logo central */
+
 .hero-visual {
     display: flex;
     justify-content: center;
     align-items: center;
+    min-width: 0;
     min-height: 350px;
+    background: transparent;
 }
 
-.hero-circulo {
-    width: min(100%, 390px);
-    aspect-ratio: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 14px;
-    border: 1px solid #C49A69;
-    border-radius: 50%;
-    outline: 1px solid rgba(196, 154, 105, 0.5);
-    outline-offset: 12px;
-    background:
-        radial-gradient(circle at 35% 25%, #79543C, transparent 45%),
-        linear-gradient(140deg, #4A2F22, #241711);
-    color: var(--crema);
-    box-shadow: 0 25px 60px rgba(60, 39, 30, 0.2);
-    text-align: center;
+/* Imagen del logo: afecta únicamente al logo central */
+
+.hero-visual img.hero-logo {
+    display: block;
+    width: 180px;
+    max-width: 100%;
+    max-height: 180px;
+    height: auto;
+    object-fit: contain;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
 }
 
-.hero-simbolo {
-    color: var(--dorado);
-    font-size: 5rem;
-    line-height: 1.1;
+/* Oculta el antiguo círculo marrón si aún existe en el HTML */
+
+.hero-visual .hero-circulo {
+    display: none;
 }
 
-.hero-circulo p {
-    font-family: "Playfair Display", Georgia, serif;
-    font-size: 1.8rem;
-}
-
-.hero-circulo > span:last-child {
-    color: var(--dorado);
-    font-size: 0.6rem;
-    letter-spacing: 2px;
-}
+/* =========================
+   SECCIONES GENERALES
+========================= */
 
 .seccion {
     padding: 95px 8%;
 }
+
+.seccion h2 {
+    margin-bottom: 20px;
+    font-size: clamp(2rem, 4vw, 3.1rem);
+}
+
+/* =========================
+   SECCIÓN MOMENTOS
+========================= */
 
 .momentos {
     background: var(--chocolate);
@@ -240,16 +257,15 @@ h3 {
     color: var(--dorado);
 }
 
-.seccion h2 {
-    margin-bottom: 20px;
-    font-size: clamp(2rem, 4vw, 3.1rem);
-}
-
 .momentos > p:last-child {
     max-width: 650px;
     margin: 0 auto;
     color: #E3D5C8;
 }
+
+/* =========================
+   CATÁLOGO
+========================= */
 
 .catalogo {
     background: var(--crema);
@@ -300,6 +316,8 @@ h3 {
     background: var(--rosa);
 }
 
+/* Estas reglas son exclusivas de las imágenes del catálogo */
+
 .producto-imagen > img,
 .carrusel-pista img {
     display: block;
@@ -311,6 +329,8 @@ h3 {
 .producto-imagen > img {
     object-fit: cover;
 }
+
+/* Fondos decorativos de las tarjetas */
 
 .imagen-1,
 .imagen-6,
@@ -339,7 +359,10 @@ h3 {
     background: linear-gradient(135deg, #EEE5D8, #CBBBA6);
 }
 
-/* Carruseles de fotografías */
+/* =========================
+   CARRUSELES DEL CATÁLOGO
+========================= */
+
 .carrusel {
     position: relative;
     width: 100%;
@@ -419,6 +442,10 @@ h3 {
     transform: scale(1.2);
 }
 
+/* =========================
+   INFORMACIÓN DEL PRODUCTO
+========================= */
+
 .producto-info {
     padding: 23px 21px;
 }
@@ -458,6 +485,10 @@ h3 {
 .boton-producto:hover {
     color: #946A3F;
 }
+
+/* =========================
+   RELLENOS
+========================= */
 
 .rellenos {
     background: #F0E6D8;
@@ -505,6 +536,10 @@ h3 {
     line-height: 1.5;
 }
 
+/* =========================
+   FORMULARIO DE PEDIDOS
+========================= */
+
 .pedidos {
     display: grid;
     grid-template-columns: 0.9fr 1.1fr;
@@ -528,6 +563,7 @@ h3 {
 }
 
 .formulario {
+    min-width: 0;
     padding: 35px;
     background: var(--crema);
     color: var(--chocolate);
@@ -549,6 +585,7 @@ h3 {
 .formulario select,
 .formulario textarea {
     width: 100%;
+    min-width: 0;
     padding: 13px 14px;
     border: 1px solid var(--borde);
     border-radius: 3px;
@@ -589,6 +626,10 @@ h3 {
     text-align: center;
 }
 
+/* =========================
+   PIE DE PÁGINA
+========================= */
+
 .pie {
     padding: 48px 7% 25px;
     background: #241711;
@@ -620,6 +661,10 @@ h3 {
     font-size: 0.78rem !important;
 }
 
+/* =========================
+   TABLET
+========================= */
+
 @media (max-width: 950px) {
     .encabezado {
         padding: 15px 4%;
@@ -650,6 +695,10 @@ h3 {
         grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 }
+
+/* =========================
+   TELÉFONOS
+========================= */
 
 @media (max-width: 650px) {
     .encabezado {
@@ -702,24 +751,15 @@ h3 {
     }
 
     .hero-visual {
-        min-height: 280px;
+        min-height: 220px;
         margin: 15px 0;
     }
 
-    .hero-circulo {
-        width: min(75%, 300px);
-    }
-
-    .hero-simbolo {
-        font-size: 4rem;
-    }
-
-    .hero-circulo p {
-        font-size: 1.4rem;
-    }
-
-    .hero-circulo > span:last-child {
-        font-size: 0.48rem;
+    /* Logo central más pequeño en teléfonos */
+    .hero-visual img.hero-logo {
+        width: 150px;
+        max-width: 80%;
+        max-height: 150px;
     }
 
     .seccion {
@@ -765,6 +805,10 @@ h3 {
     }
 }
 
+/* =========================
+   TELÉFONOS PEQUEÑOS
+========================= */
+
 @media (max-width: 380px) {
     .rellenos-grid {
         grid-template-columns: 1fr;
@@ -775,6 +819,10 @@ h3 {
     }
 }
 
+/* =========================
+   ACCESIBILIDAD
+========================= */
+
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -783,27 +831,4 @@ h3 {
         transition-duration: 0.01ms !important;
     }
 }
-
-/* Logo principal de Alborada, sin bola marrón */
-.hero-visual {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-}
-
-.hero-circulo {
-  display: none;
-}
-
-.hero-logo {
-  display: block;
-  width: 55%;
-  max-width: 220px;
-  max-height: 220px;
-  height: auto;
-  object-fit: contain;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-}
+```
