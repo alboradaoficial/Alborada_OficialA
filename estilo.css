@@ -815,3 +815,26 @@ h3 {
         transition-duration: 0.01ms !important;
     }
 }
+
+/* LOGO EN EL CÍRCULO DE LA PORTADA */
+.hero-circulo {
+    padding: 25px;
+}
+
+.logo-circulo {
+    display: block;
+    width: 85%;
+    max-width: 310px;
+    max-height: 310px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* AJUSTE PARA CELULARES */
+@media (max-width: 650px) {
+    .logo-circulo {
+        width: 90%;
+        max-width: 240px;
+        max-height: 240px;
+    }
+}
