@@ -783,3 +783,26 @@ h3 {
         transition-duration: 0.01ms !important;
     }
 }
+
+/* Logo principal de Alborada, sin bola marrón */
+.hero-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+.hero-circulo {
+  display: none;
+}
+
+.hero-logo {
+  display: block;
+  width: 100%;
+  max-width: 380px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
