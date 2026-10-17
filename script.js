@@ -2,7 +2,6 @@
 "use strict";
 
 // Número comercial de WhatsApp de Alborada.
-// Incluye el código de Colombia, sin espacios ni signos.
 const NUMERO_WHATSAPP = "573239086199";
 
 const formulario = document.getElementById("formulario-pedido");
@@ -10,231 +9,323 @@ const selectorProducto = document.getElementById("producto");
 const opcionVino = document.getElementById("opcion-vino");
 const selectorVino = document.getElementById("tamano-vino");
 const campoComentarios = document.getElementById("comentarios");
+const selectorRelleno = document.getElementById("relleno");
 
-// Actualizar el campo del vino según el producto elegido.
+// ==================================================
+// TAMAÑO DEL VINO
+// ==================================================
+
 function actualizarOpcionVino() {
-    const producto = selectorProducto.value.toLowerCase();
-    const incluyeVino = producto.includes("vino");
+  if (!selectorProducto || !opcionVino || !selectorVino) return;
 
-    opcionVino.classList.toggle("visible", incluyeVino);
-    selectorVino.required = incluyeVino;
+  const producto = selectorProducto.value.toLowerCase();
+  const incluyeVino = producto.includes("vino");
 
-    if (!incluyeVino) {
-        selectorVino.value = "";
-    }
+  opcionVino.classList.toggle("visible", incluyeVino);
+  selectorVino.required = incluyeVino;
+
+  if (!incluyeVino) {
+    selectorVino.value = "";
+  }
 }
 
-selectorProducto.addEventListener("change", actualizarOpcionVino);
+if (selectorProducto) {
+  selectorProducto.addEventListener("change", actualizarOpcionVino);
+  actualizarOpcionVino();
+}
 
-// Inicializar todos los carruseles de manera independiente.
-document.querySelectorAll("[data-carrusel]").forEach((carrusel) => {
-    const pista = carrusel.querySelector(".carrusel-pista");
-    const imagenes = Array.from(pista.querySelectorAll("img"));
-    const botonAnterior = carrusel.querySelector(".anterior");
-    const botonSiguiente = carrusel.querySelector(".siguiente");
-    const controles = carrusel.querySelector(".carrusel-controles");
+// ==================================================
+// SELECCIONAR UN PRODUCTO DESDE EL CATÁLOGO
+// ==================================================
 
-    let indiceActual = 0;
-
-    // Si solo hay una fotografía, no se necesitan controles.
-    if (imagenes.length <= 1) {
-        botonAnterior.hidden = true;
-        botonSiguiente.hidden = true;
-        controles.hidden = true;
-        return;
-    }
-
-    // Crear un punto por cada fotografía.
-    const puntos = imagenes.map((imagen, indice) => {
-        const punto = document.createElement("button");
-
-        punto.type = "button";
-        punto.className = "carrusel-punto";
-        punto.setAttribute("aria-label", "Mostrar fotografía " + (indice + 1));
-
-        punto.addEventListener("click", () => {
-            mostrarImagen(indice);
-        });
-
-        controles.appendChild(punto);
-        return punto;
-    });
-
-    function mostrarImagen(indice) {
-        indiceActual = (indice + imagenes.length) % imagenes.length;
-
-        pista.style.transform =
-            "translateX(-" + (indiceActual * 100) + "%)";
-
-        puntos.forEach((punto, posicion) => {
-            punto.classList.toggle("activo", posicion === indiceActual);
-            punto.setAttribute(
-                "aria-current",
-                posicion === indiceActual ? "true" : "false"
-            );
-        });
-    }
-
-    botonAnterior.addEventListener("click", () => {
-        mostrarImagen(indiceActual - 1);
-    });
-
-    botonSiguiente.addEventListener("click", () => {
-        mostrarImagen(indiceActual + 1);
-    });
-
-    mostrarImagen(0);
-});
-
-// Elegir un producto directamente desde su tarjeta.
 document.querySelectorAll("[data-producto]").forEach((boton) => {
-    boton.addEventListener("click", () => {
-        const nombreProducto = boton.dataset.producto;
-        const opciones = Array.from(selectorProducto.options);
+  boton.addEventListener("click", () => {
+    if (!selectorProducto) return;
 
-        const opcionEncontrada = opciones.find(
-            (opcion) => opcion.value === nombreProducto
-        );
+    const nombreProducto = boton.dataset.producto;
 
-        if (opcionEncontrada) {
-            selectorProducto.value = opcionEncontrada.value;
-        } else {
-            selectorProducto.value = "Otro producto o diseño personalizado";
-            campoComentarios.value =
-                "Me interesa este producto: " + nombreProducto;
-        }
+    const opcion = Array.from(selectorProducto.options).find(
+      (item) => item.value === nombreProducto
+    );
 
-        actualizarOpcionVino();
+    if (opcion) {
+      selectorProducto.value = opcion.value;
+    } else {
+      selectorProducto.value = "Otro producto o diseño personalizado";
 
-        document.getElementById("pedidos").scrollIntoView({
-            behavior: "smooth"
-        });
+      if (campoComentarios) {
+        campoComentarios.value =
+          "Me interesa este producto: " + nombreProducto;
+      }
+    }
+
+    actualizarOpcionVino();
+
+    document.getElementById("pedidos")?.scrollIntoView({
+      behavior: "smooth"
     });
+  });
 });
 
-// Preparar el mensaje y abrir WhatsApp.
-formulario.addEventListener("submit", (evento) => {
+// ==================================================
+// CARRUSELES DE FOTOGRAFÍAS
+// ==================================================
+
+document.querySelectorAll("[data-carrusel]").forEach((carrusel) => {
+  const pista = carrusel.querySelector(".carrusel-pista");
+  const anterior = carrusel.querySelector(".carrusel-flecha.anterior");
+  const siguiente = carrusel.querySelector(".carrusel-flecha.siguiente");
+  const controles = carrusel.querySelector(".carrusel-controles");
+
+  if (!pista || !anterior || !siguiente || !controles) {
+    console.error("No se pudo inicializar el carrusel:", carrusel);
+    return;
+  }
+
+  const imagenes = Array.from(pista.querySelectorAll("img"));
+  let indiceActual = 0;
+
+  if (imagenes.length === 0) return;
+
+  if (imagenes.length === 1) {
+    anterior.hidden = true;
+    siguiente.hidden = true;
+    controles.hidden = true;
+
+    imagenes[0].classList.add("activa");
+    imagenes[0].setAttribute("aria-hidden", "false");
+    return;
+  }
+
+  controles.replaceChildren();
+
+  const puntos = imagenes.map((imagen, indice) => {
+    const punto = document.createElement("button");
+
+    punto.type = "button";
+    punto.className = "carrusel-punto";
+    punto.setAttribute(
+      "aria-label",
+      `Mostrar fotografía ${indice + 1}`
+    );
+
+    punto.addEventListener("click", () => {
+      mostrarImagen(indice);
+    });
+
+    controles.appendChild(punto);
+    return punto;
+  });
+
+  function mostrarImagen(nuevoIndice) {
+    indiceActual =
+      (nuevoIndice + imagenes.length) % imagenes.length;
+
+    imagenes.forEach((imagen, indice) => {
+      const activa = indice === indiceActual;
+
+      imagen.classList.toggle("activa", activa);
+      imagen.setAttribute("aria-hidden", String(!activa));
+    });
+
+    puntos.forEach((punto, indice) => {
+      const activo = indice === indiceActual;
+
+      punto.classList.toggle("activo", activo);
+
+      if (activo) {
+        punto.setAttribute("aria-current", "true");
+      } else {
+        punto.removeAttribute("aria-current");
+      }
+    });
+  }
+
+  anterior.addEventListener("click", (evento) => {
     evento.preventDefault();
+    mostrarImagen(indiceActual - 1);
+  });
+
+  siguiente.addEventListener("click", (evento) => {
+    evento.preventDefault();
+    mostrarImagen(indiceActual + 1);
+  });
+
+  // Permite deslizar entre fotografías en teléfonos.
+  let inicioX = 0;
+
+  carrusel.addEventListener("touchstart", (evento) => {
+    inicioX = evento.changedTouches[0].screenX;
+  }, { passive: true });
+
+  carrusel.addEventListener("touchend", (evento) => {
+    const finalX = evento.changedTouches[0].screenX;
+    const diferencia = finalX - inicioX;
+
+    if (Math.abs(diferencia) < 40) return;
+
+    mostrarImagen(
+      indiceActual + (diferencia < 0 ? 1 : -1)
+    );
+  }, { passive: true });
+
+  mostrarImagen(0);
+});
+
+// ==================================================
+// VISOR PARA AMPLIAR LAS FOTOGRAFÍAS
+// ==================================================
+
+const visor = document.getElementById("visor-imagenes");
+const imagenVisor = visor?.querySelector(".visor-foto");
+const botonCerrarVisor = visor?.querySelector(".visor-cerrar");
+
+let ultimaImagenPulsada = null;
+
+function abrirVisor(imagen) {
+  if (!visor || !imagenVisor || !imagen || !imagen.src) return;
+
+  ultimaImagenPulsada = imagen;
+
+  imagenVisor.src = imagen.currentSrc || imagen.src;
+  imagenVisor.alt =
+    imagen.alt || "Fotografía ampliada de un producto Alborada";
+
+  visor.classList.add("activo");
+  visor.setAttribute("aria-hidden", "false");
+  document.body.classList.add("visor-abierto");
+
+  botonCerrarVisor?.focus();
+}
+
+function cerrarVisor() {
+  if (!visor || !imagenVisor) return;
+  if (!visor.classList.contains("activo")) return;
+
+  visor.classList.remove("activo");
+  visor.setAttribute("aria-hidden", "true");
+
+  imagenVisor.removeAttribute("src");
+  imagenVisor.alt = "";
+
+  document.body.classList.remove("visor-abierto");
+
+  if (ultimaImagenPulsada?.isConnected) {
+    ultimaImagenPulsada.focus({ preventScroll: true });
+  }
+}
+
+// Funciona con imágenes normales y fotografías de los carruseles.
+document.addEventListener("click", (evento) => {
+  const objetivo = evento.target;
+
+  if (!(objetivo instanceof Element)) return;
+
+  const imagen = objetivo.closest(".producto-imagen img");
+
+  if (imagen) {
+    evento.preventDefault();
+    abrirVisor(imagen);
+  }
+});
+
+// Cerrar con la X.
+botonCerrarVisor?.addEventListener("click", cerrarVisor);
+
+// Cerrar al hacer clic en el fondo oscuro.
+visor?.addEventListener("click", (evento) => {
+  if (evento.target === visor) {
+    cerrarVisor();
+  }
+});
+
+// Cerrar con Escape.
+document.addEventListener("keydown", (evento) => {
+  if (evento.key === "Escape") {
+    cerrarVisor();
+  }
+});
+
+// ==================================================
+// FORMULARIO DE PEDIDOS POR WHATSAPP
+// ==================================================
+
+if (
+  formulario &&
+  selectorProducto &&
+  selectorVino &&
+  campoComentarios &&
+  selectorRelleno
+) {
+  formulario.addEventListener("submit", (evento) => {
+    evento.preventDefault();
+
+    if (!formulario.reportValidity()) return;
 
     const nombre = document.getElementById("nombre").value.trim();
     const producto = selectorProducto.value;
     const tamanoVino = selectorVino.value;
-    const relleno = document.getElementById("relleno").value;
+    const relleno = selectorRelleno.value;
     const comentarios = campoComentarios.value.trim();
 
     if (!nombre || !producto) {
-        alert("Por favor, escribe tu nombre y selecciona un producto.");
-        return;
+      alert("Por favor, escribe tu nombre y selecciona un producto.");
+      return;
     }
 
     if (producto.toLowerCase().includes("vino") && !tamanoVino) {
-        alert("Por favor, selecciona el tamaño del vino.");
-        selectorVino.focus();
-        return;
+      alert("Por favor, selecciona el tamaño del vino.");
+      selectorVino.focus();
+      return;
     }
 
     const lineas = [
-        "¡Hola, Alborada! Quiero hacer un pedido.",
-        "",
-        "*Nombre:* " + nombre,
-        "*Producto:* " + producto
+      "¡Hola, Alborada! Quiero hacer un pedido.",
+      "",
+      `*Nombre:* ${nombre}`,
+      `*Producto:* ${producto}`
     ];
 
     if (producto.toLowerCase().includes("vino") && tamanoVino) {
-        lineas.push("*Tamaño del vino:* " + tamanoVino);
+      lineas.push(`*Tamaño del vino:* ${tamanoVino}`);
     }
 
     if (relleno) {
-        lineas.push("*Relleno elegido:* " + relleno);
+      lineas.push(`*Relleno elegido:* ${relleno}`);
     }
 
     if (comentarios) {
-        lineas.push("*Detalles adicionales:* " + comentarios);
+      lineas.push(`*Detalles adicionales:* ${comentarios}`);
     }
 
     lineas.push(
-        "",
-        "¿Me pueden confirmar la disponibilidad y el precio final?"
+      "",
+      "¿Me pueden confirmar la disponibilidad, el precio final y la forma de pago?"
     );
 
     const mensaje = encodeURIComponent(lineas.join("\n"));
     const enlaceWhatsApp =
-        "https://wa.me/" + NUMERO_WHATSAPP + "?text=" + mensaje;
+      `https://wa.me/${NUMERO_WHATSAPP}?text=${mensaje}`;
 
-    window.open(enlaceWhatsApp, "_blank", "noopener,noreferrer");
-});
+    const ventana = window.open(
+      enlaceWhatsApp,
+      "_blank",
+      "noopener,noreferrer"
+    );
 
-// Actualizar el año del pie de página.
+    // Alternativa si el navegador bloquea la nueva ventana.
+    if (!ventana) {
+      window.location.href = enlaceWhatsApp;
+    }
+  });
+}
+
+// ==================================================
+// AÑO AUTOMÁTICO EN EL PIE DE PÁGINA
+// ==================================================
+
 const elementoAnio = document.getElementById("anio");
 
 if (elementoAnio) {
-    elementoAnio.textContent = new Date().getFullYear();
+  elementoAnio.textContent = new Date().getFullYear();
 }
-
-// ========== EFECTO AMPLIAR IMAGEN AL HACER CLIC ==========
-const visor = document.createElement('div');
-visor.className = 'visor-imagen';
-visor.innerHTML = `
-  <span class="cerrar">&times;</span>
-  <img src="" alt="Imagen ampliada">
-`;
-document.body.appendChild(visor);
-
-const imagenVisor = visor.querySelector('img');
-const botonCerrar = visor.querySelector('.cerrar');
-
-// ========== EFECTO AMPLIAR IMAGEN AL HACER CLIC ==========
-const visor = document.createElement('div');
-visor.className = 'visor-imagen';
-visor.innerHTML = `
-  <span class="cerrar">&times;</span>
-  <img src="" alt="Imagen ampliada">
-`;
-document.body.appendChild(visor);
-
-const imagenVisor = visor.querySelector('img');
-const botonCerrar = visor.querySelector('.cerrar');
-
-// Función para abrir la imagen
-function abrirImagen(src, alt) {
-  imagenVisor.src = src;
-  imagenVisor.alt = alt;
-  visor.classList.add('activo');
-  document.body.style.overflow = 'hidden';
-}
-
-// Cerrar
-function cerrarVisor() {
-  visor.classList.remove('activo');
-  document.body.style.overflow = '';
-}
-
-// Asignar clic a TODAS las imágenes de productos
-function asignarClicImagenes() {
-  // Imágenes normales
-  document.querySelectorAll('.producto-imagen > img').forEach(img => {
-    img.style.cursor = 'zoom-in';
-    img.addEventListener('click', () => abrirImagen(img.src, img.alt));
-  });
-
-  // Imágenes dentro de carruseles
-  document.querySelectorAll('.carrusel-pista img').forEach(img => {
-    img.style.cursor = 'zoom-in';
-    img.addEventListener('click', (e) => {
-      e.stopPropagation(); // Evitar que se confunda con el movimiento del carrusel
-      abrirImagen(img.src, img.alt);
-    });
-  });
-}
-
-// Ejecutar al cargar la página
-document.addEventListener('DOMContentLoaded', asignarClicImagenes);
-
-// Eventos de cierre
-botonCerrar.addEventListener('click', cerrarVisor);
-visor.addEventListener('click', (e) => {
-  if (e.target === visor) cerrarVisor();
-});
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') cerrarVisor();
-});
