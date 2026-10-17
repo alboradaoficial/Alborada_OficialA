@@ -1,30 +1,18 @@
 
 "use strict";
 
-/* ========================================
-   ALBORADA - FUNCIONES DE LA PÁGINA
-   Archivo: script.js
-======================================== */
-
 // Número comercial de WhatsApp de Alborada.
+// Incluye el código de Colombia, sin espacios ni signos.
 const NUMERO_WHATSAPP = "573239086199";
 
-// Elementos del formulario.
 const formulario = document.getElementById("formulario-pedido");
 const selectorProducto = document.getElementById("producto");
 const opcionVino = document.getElementById("opcion-vino");
 const selectorVino = document.getElementById("tamano-vino");
 const campoComentarios = document.getElementById("comentarios");
 
-/* ========================================
-   MOSTRAR U OCULTAR LA OPCIÓN DE VINO
-======================================== */
-
+// Actualizar el campo del vino según el producto elegido.
 function actualizarOpcionVino() {
-    if (!selectorProducto || !opcionVino || !selectorVino) {
-        return;
-    }
-
     const producto = selectorProducto.value.toLowerCase();
     const incluyeVino = producto.includes("vino");
 
@@ -36,349 +24,147 @@ function actualizarOpcionVino() {
     }
 }
 
-if (selectorProducto) {
-    selectorProducto.addEventListener("change", actualizarOpcionVino);
-    actualizarOpcionVino();
-}
+selectorProducto.addEventListener("change", actualizarOpcionVino);
 
-/* ========================================
-   CARRUSELES DE FOTOGRAFÍAS
-======================================== */
-
+// Inicializar todos los carruseles de manera independiente.
 document.querySelectorAll("[data-carrusel]").forEach((carrusel) => {
     const pista = carrusel.querySelector(".carrusel-pista");
-    const botonAnterior = carrusel.querySelector(
-        ".carrusel-flecha.anterior"
-    );
-    const botonSiguiente = carrusel.querySelector(
-        ".carrusel-flecha.siguiente"
-    );
+    const imagenes = Array.from(pista.querySelectorAll("img"));
+    const botonAnterior = carrusel.querySelector(".anterior");
+    const botonSiguiente = carrusel.querySelector(".siguiente");
     const controles = carrusel.querySelector(".carrusel-controles");
 
-    if (!pista) {
-        console.error(
-            "No se encontró .carrusel-pista en:",
-            carrusel
-        );
-        return;
-    }
-
-    const imagenes = Array.from(pista.querySelectorAll("img"));
-
-    if (imagenes.length === 0) {
-        console.error(
-            "Este carrusel no contiene fotografías:",
-            carrusel
-        );
-        return;
-    }
-
     let indiceActual = 0;
-    const puntos = [];
 
-    // Preparar la pista horizontal.
-    pista.style.display = "flex";
-    pista.style.width = "100%";
-    pista.style.height = "100%";
-    pista.style.transition = "transform 0.35s ease";
-    pista.style.willChange = "transform";
+    // Si solo hay una fotografía, no se necesitan controles.
+    if (imagenes.length <= 1) {
+        botonAnterior.hidden = true;
+        botonSiguiente.hidden = true;
+        controles.hidden = true;
+        return;
+    }
 
-    // Preparar cada fotografía.
-    imagenes.forEach((imagen, indice) => {
-        imagen.style.display = "block";
-        imagen.style.flex = "0 0 100%";
-        imagen.style.minWidth = "100%";
-        imagen.style.width = "100%";
-        imagen.style.height = "100%";
-        imagen.style.objectFit = "contain";
-        imagen.draggable = false;
+    // Crear un punto por cada fotografía.
+    const puntos = imagenes.map((imagen, indice) => {
+        const punto = document.createElement("button");
 
-        // Avisar si una imagen no se encuentra.
-        imagen.addEventListener("error", () => {
-            console.error(
-                "No se pudo cargar la imagen:",
-                imagen.getAttribute("src"),
-                "| Ruta interpretada:",
-                imagen.src
-            );
+        punto.type = "button";
+        punto.className = "carrusel-punto";
+        punto.setAttribute("aria-label", "Mostrar fotografía " + (indice + 1));
+
+        punto.addEventListener("click", () => {
+            mostrarImagen(indice);
         });
 
-        // Confirmar cuando una imagen carga.
-        imagen.addEventListener("load", () => {
-            console.log(
-                "Imagen cargada correctamente:",
-                imagen.src
-            );
-        });
-
-        // Crear un punto por cada fotografía.
-        if (controles && imagenes.length > 1) {
-            const punto = document.createElement("button");
-
-            punto.type = "button";
-            punto.className = "carrusel-punto";
-            punto.setAttribute(
-                "aria-label",
-                "Mostrar fotografía " + (indice + 1)
-            );
-
-            punto.addEventListener("click", () => {
-                mostrarImagen(indice);
-            });
-
-            controles.appendChild(punto);
-            puntos.push(punto);
-        }
+        controles.appendChild(punto);
+        return punto;
     });
 
-    // Mostrar las flechas solo si hay varias fotografías.
-    if (imagenes.length <= 1) {
-        if (botonAnterior) {
-            botonAnterior.hidden = true;
-        }
-
-        if (botonSiguiente) {
-            botonSiguiente.hidden = true;
-        }
-
-        if (controles) {
-            controles.hidden = true;
-        }
-    } else {
-        if (botonAnterior) {
-            botonAnterior.hidden = false;
-        }
-
-        if (botonSiguiente) {
-            botonSiguiente.hidden = false;
-        }
-
-        if (controles) {
-            controles.hidden = false;
-        }
-    }
-
-    // Mostrar la fotografía seleccionada.
     function mostrarImagen(indice) {
-        indiceActual =
-            (indice + imagenes.length) % imagenes.length;
+        indiceActual = (indice + imagenes.length) % imagenes.length;
 
         pista.style.transform =
-            `translateX(-${indiceActual * 100}%)`;
+            "translateX(-" + (indiceActual * 100) + "%)";
 
         puntos.forEach((punto, posicion) => {
-            const activo = posicion === indiceActual;
-
-            punto.classList.toggle("activo", activo);
-
+            punto.classList.toggle("activo", posicion === indiceActual);
             punto.setAttribute(
                 "aria-current",
-                activo ? "true" : "false"
+                posicion === indiceActual ? "true" : "false"
             );
         });
     }
 
-    // Fotografía anterior.
-    if (botonAnterior) {
-        botonAnterior.addEventListener("click", () => {
-            mostrarImagen(indiceActual - 1);
-        });
-    }
+    botonAnterior.addEventListener("click", () => {
+        mostrarImagen(indiceActual - 1);
+    });
 
-    // Fotografía siguiente.
-    if (botonSiguiente) {
-        botonSiguiente.addEventListener("click", () => {
-            mostrarImagen(indiceActual + 1);
-        });
-    }
+    botonSiguiente.addEventListener("click", () => {
+        mostrarImagen(indiceActual + 1);
+    });
 
-    // Iniciar en la primera fotografía.
     mostrarImagen(0);
 });
 
-/* ========================================
-   SELECCIONAR UN PRODUCTO DEL CATÁLOGO
-======================================== */
+// Elegir un producto directamente desde su tarjeta.
+document.querySelectorAll("[data-producto]").forEach((boton) => {
+    boton.addEventListener("click", () => {
+        const nombreProducto = boton.dataset.producto;
+        const opciones = Array.from(selectorProducto.options);
 
-if (selectorProducto) {
-    document.querySelectorAll("[data-producto]").forEach((boton) => {
-        boton.addEventListener("click", () => {
-            const nombreProducto = boton.dataset.producto;
+        const opcionEncontrada = opciones.find(
+            (opcion) => opcion.value === nombreProducto
+        );
 
-            const opciones = Array.from(
-                selectorProducto.options
-            );
+        if (opcionEncontrada) {
+            selectorProducto.value = opcionEncontrada.value;
+        } else {
+            selectorProducto.value = "Otro producto o diseño personalizado";
+            campoComentarios.value =
+                "Me interesa este producto: " + nombreProducto;
+        }
 
-            // Buscar una opción que coincida con el producto.
-            const opcionEncontrada = opciones.find((opcion) => {
-                return (
-                    opcion.value.trim().toLowerCase() ===
-                    nombreProducto.trim().toLowerCase()
-                );
-            });
+        actualizarOpcionVino();
 
-            if (opcionEncontrada) {
-                selectorProducto.value = opcionEncontrada.value;
-            } else {
-                // Si no existe, seleccionar la opción personalizada.
-                const opcionPersonalizada = opciones.find((opcion) => {
-                    return opcion.value
-                        .toLowerCase()
-                        .includes("personalizado");
-                });
-
-                if (opcionPersonalizada) {
-                    selectorProducto.value =
-                        opcionPersonalizada.value;
-                }
-
-                if (campoComentarios) {
-                    campoComentarios.value =
-                        "Me interesa este producto: " +
-                        nombreProducto;
-                }
-            }
-
-            actualizarOpcionVino();
-
-            // Desplazarse al formulario.
-            const seccionPedidos =
-                document.getElementById("pedidos");
-
-            if (seccionPedidos) {
-                seccionPedidos.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
-                });
-            }
+        document.getElementById("pedidos").scrollIntoView({
+            behavior: "smooth"
         });
     });
-}
+});
 
-/* ========================================
-   ENVIAR PEDIDO A WHATSAPP
-======================================== */
+// Preparar el mensaje y abrir WhatsApp.
+formulario.addEventListener("submit", (evento) => {
+    evento.preventDefault();
 
-if (formulario) {
-    formulario.addEventListener("submit", (evento) => {
-        evento.preventDefault();
+    const nombre = document.getElementById("nombre").value.trim();
+    const producto = selectorProducto.value;
+    const tamanoVino = selectorVino.value;
+    const relleno = document.getElementById("relleno").value;
+    const comentarios = campoComentarios.value.trim();
 
-        const campoNombre =
-            document.getElementById("nombre");
+    if (!nombre || !producto) {
+        alert("Por favor, escribe tu nombre y selecciona un producto.");
+        return;
+    }
 
-        const campoRelleno =
-            document.getElementById("relleno");
+    if (producto.toLowerCase().includes("vino") && !tamanoVino) {
+        alert("Por favor, selecciona el tamaño del vino.");
+        selectorVino.focus();
+        return;
+    }
 
-        const nombre = campoNombre
-            ? campoNombre.value.trim()
-            : "";
+    const lineas = [
+        "¡Hola, Alborada! Quiero hacer un pedido.",
+        "",
+        "*Nombre:* " + nombre,
+        "*Producto:* " + producto
+    ];
 
-        const producto = selectorProducto
-            ? selectorProducto.value
-            : "";
+    if (producto.toLowerCase().includes("vino") && tamanoVino) {
+        lineas.push("*Tamaño del vino:* " + tamanoVino);
+    }
 
-        const tamanoVino = selectorVino
-            ? selectorVino.value
-            : "";
+    if (relleno) {
+        lineas.push("*Relleno elegido:* " + relleno);
+    }
 
-        const relleno = campoRelleno
-            ? campoRelleno.value
-            : "";
+    if (comentarios) {
+        lineas.push("*Detalles adicionales:* " + comentarios);
+    }
 
-        const comentarios = campoComentarios
-            ? campoComentarios.value.trim()
-            : "";
+    lineas.push(
+        "",
+        "¿Me pueden confirmar la disponibilidad y el precio final?"
+    );
 
-        // Validar los datos principales.
-        if (!nombre || !producto) {
-            alert(
-                "Por favor, escribe tu nombre y selecciona un producto."
-            );
-            return;
-        }
+    const mensaje = encodeURIComponent(lineas.join("\n"));
+    const enlaceWhatsApp =
+        "https://wa.me/" + NUMERO_WHATSAPP + "?text=" + mensaje;
 
-        // Si el producto incluye vino, exigir su tamaño.
-        if (
-            producto.toLowerCase().includes("vino") &&
-            !tamanoVino
-        ) {
-            alert(
-                "Por favor, selecciona el tamaño del vino."
-            );
+    window.open(enlaceWhatsApp, "_blank", "noopener,noreferrer");
+});
 
-            if (selectorVino) {
-                selectorVino.focus();
-            }
-
-            return;
-        }
-
-        // Construir el mensaje del pedido.
-        const lineas = [
-            "¡Hola, Alborada! Quiero hacer un pedido.",
-            "",
-            "*Nombre:* " + nombre,
-            "*Producto:* " + producto
-        ];
-
-        if (
-            producto.toLowerCase().includes("vino") &&
-            tamanoVino
-        ) {
-            lineas.push(
-                "*Tamaño del vino:* " + tamanoVino
-            );
-        }
-
-        if (relleno) {
-            lineas.push(
-                "*Relleno elegido:* " + relleno
-            );
-        }
-
-        if (comentarios) {
-            lineas.push(
-                "*Detalles adicionales:* " + comentarios
-            );
-        }
-
-        lineas.push(
-            "",
-            "¿Me pueden confirmar la disponibilidad y el precio final?"
-        );
-
-        // Codificar el mensaje para la URL.
-        const mensaje = encodeURIComponent(
-            lineas.join("\n")
-        );
-
-        const enlaceWhatsApp =
-            "https://wa.me/" +
-            NUMERO_WHATSAPP +
-            "?text=" +
-            mensaje;
-
-        // Abrir WhatsApp en otra pestaña.
-        const ventana = window.open(
-            enlaceWhatsApp,
-            "_blank",
-            "noopener,noreferrer"
-        );
-
-        // Avisar si el navegador bloqueó la ventana.
-        if (!ventana) {
-            alert(
-                "El navegador pudo bloquear la ventana. " +
-                "Permite las ventanas emergentes o abre WhatsApp manualmente."
-            );
-        }
-    });
-}
-
-/* ========================================
-   ACTUALIZAR EL AÑO DEL PIE DE PÁGINA
-======================================== */
-
+// Actualizar el año del pie de página.
 const elementoAnio = document.getElementById("anio");
 
 if (elementoAnio) {
