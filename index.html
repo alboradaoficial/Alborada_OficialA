@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,57 +6,76 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Alborada: chocolates artesanales, anchetas y detalles especiales hechos para regalar.">
   <title>Alborada | Chocolatería artesanal</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="estilo.css">
   <script src="script.js" defer></script>
 </head>
 <body>
+
   <header class="encabezado">
     <a class="logo" href="#inicio" aria-label="Alborada, inicio">
       <img src="logo.jpeg" alt="Logo de Alborada" class="logo-imagen">
     </a>
+
     <nav class="navegacion" aria-label="Navegación principal">
       <a href="#inicio">Inicio</a>
       <a href="#catalogo">Catálogo</a>
       <a href="#rellenos">Rellenos</a>
       <a href="#pedidos">Pedidos</a>
     </nav>
+
     <a class="boton boton-dorado" href="#pedidos">Hacer un pedido</a>
   </header>
+
   <main>
     <section class="hero" id="inicio">
       <div class="hero-contenido">
         <p class="etiqueta">CHOCOLATERÍA ARTESANAL</p>
         <h1>Detalles que se sienten, <em>sabores que enamoran.</em></h1>
         <p class="hero-texto">
-          Creamos chocolates y regalos especiales para convertir cada momento en un recuerdo inolvidable.
+          Creamos chocolates y regalos especiales para convertir cada momento
+          en un recuerdo inolvidable.
         </p>
         <a class="boton boton-dorado" href="#catalogo">Explorar catálogo</a>
         <a class="enlace-simple" href="#pedidos">Personalizar mi pedido ↗</a>
       </div>
+
       <div class="hero-visual">
-        <img src="logo.jpeg" alt="Alborada — Chocolate que despierta sentimientos" class="logo-hero">
+        <div class="hero-circulo">
+          <span class="hero-simbolo">✧</span>
+          <p>Hecho con<br>amor</p>
+          <span>ALBORADA · CHOCOLATERÍA</span>
+        </div>
       </div>
     </section>
+
     <section class="seccion momentos">
       <p class="etiqueta">UN DETALLE, MUCHAS EMOCIONES</p>
       <h2>Hay momentos que merecen algo extraordinario.</h2>
       <p>
-        Diseñamos cada detalle para celebrar, agradecer, sorprender y acompañar a las personas que hacen especial tu vida.
+        Diseñamos cada detalle para celebrar, agradecer, sorprender y acompañar
+        a las personas que hacen especial tu vida.
       </p>
     </section>
+
     <section class="seccion catalogo" id="catalogo">
       <div class="encabezado-seccion">
         <div>
           <p class="etiqueta">NUESTRA SELECCIÓN</p>
           <h2>Catálogo de productos</h2>
         </div>
-        <p>Encuentra tu detalle favorito y selecciónalo para hacer tu pedido por WhatsApp.</p>
+        <p>
+          Encuentra tu detalle favorito y selecciónalo para hacer tu pedido
+          por WhatsApp.
+        </p>
       </div>
+
       <div class="productos-grid">
-        <!-- PRODUCTO 1 -->
+
         <article class="producto">
           <div class="producto-imagen imagen-1">
             <img src="Chocorazones diseñados 1.jpeg" alt="Chocorazones diseñados con relleno especial" loading="lazy">
@@ -67,7 +87,7 @@
             <button class="boton-producto" data-producto="Chocorazones diseñados con relleno especial">Quiero este producto ↗</button>
           </div>
         </article>
-        <!-- PRODUCTO 2 -->
+
         <article class="producto">
           <div class="producto-imagen imagen-2">
             <img src="Caja de vino con rosas.jpeg" alt="Caja de vino, chocolates con relleno y rosas" loading="lazy">
@@ -79,7 +99,7 @@
             <button class="boton-producto" data-producto="Caja de vino, chocolates con relleno y rosas">Quiero este producto ↗</button>
           </div>
         </article>
-        <!-- PRODUCTO 3 -->
+
         <article class="producto">
           <div class="producto-imagen imagen-3">
             <img src="Caja de vino sin rosas.jpeg" alt="Caja de vino y chocolates con relleno" loading="lazy">
@@ -91,7 +111,7 @@
             <button class="boton-producto" data-producto="Caja de vino y chocolates con relleno">Quiero este producto ↗</button>
           </div>
         </article>
-        <!-- PRODUCTO 4 -->
+
         <article class="producto">
           <div class="producto-imagen imagen-4">
             <img src="Caja con 6 chocofresas1.jpeg" alt="Caja con seis chocofresas diseñadas" loading="lazy">
@@ -103,7 +123,7 @@
             <button class="boton-producto" data-producto="Caja con 6 chocofresas diseñadas">Quiero este producto ↗</button>
           </div>
         </article>
-        <!-- PRODUCTO 5 -->
+
         <article class="producto">
           <div class="producto-imagen imagen-5">
             <img src="Donas1.jpeg" alt="Donas de chocolate con relleno especial" loading="lazy">
@@ -115,14 +135,14 @@
             <button class="boton-producto" data-producto="Donas de chocolate con relleno especial">Quiero este producto ↗</button>
           </div>
         </article>
-        <!-- PRODUCTO 6: CARRUSEL -->
+
         <article class="producto">
           <div class="producto-imagen imagen-6">
             <div class="carrusel" data-carrusel aria-label="Fotos de par de chocorazones">
               <div class="carrusel-pista">
-                <img src="Par de chocorazones1.jpeg" alt="Par de chocorazones, foto 1" loading="lazy">
-                <img src="par chocorazones2.jpeg" alt="Par de chocorazones, foto 2" loading="lazy">
-                <img src="par chocorazones 3.jpeg" alt="Par de chocorazones, foto 3" loading="lazy">
+                <img src="Par de chocorazones1.jpeg" alt="Par de chocorazones grandes diseñados, foto 1" loading="lazy">
+                <img src="par chocorazones2.jpeg" alt="Par de chocorazones grandes diseñados, foto 2" loading="lazy">
+                <img src="par chocorazones 3.jpeg" alt="Par de chocorazones grandes diseñados, foto 3" loading="lazy">
               </div>
               <button class="carrusel-flecha anterior" type="button" aria-label="Foto anterior">‹</button>
               <button class="carrusel-flecha siguiente" type="button" aria-label="Foto siguiente">›</button>
@@ -136,13 +156,13 @@
             <button class="boton-producto" data-producto="Par de chocorazones grandes diseñados">Quiero este producto ↗</button>
           </div>
         </article>
-        <!-- PRODUCTO 7: CARRUSEL -->
+
         <article class="producto">
           <div class="producto-imagen imagen-7">
             <div class="carrusel" data-carrusel aria-label="Fotos de ancheta con nueve chocolates">
               <div class="carrusel-pista">
-                <img src="ancheta 9 chocolates1.jpeg" alt="Ancheta con nueve chocolates, foto 1" loading="lazy">
-                <img src="ancheta 9 chocolates 2.jpeg" alt="Ancheta con nueve chocolates, foto 2" loading="lazy">
+                <img src="ancheta 9 chocolates1.jpeg" alt="Ancheta con rosas, vino pequeño y nueve chocolates, foto 1" loading="lazy">
+                <img src="ancheta 9 chocolates 2.jpeg" alt="Ancheta con rosas, vino pequeño y nueve chocolates, foto 2" loading="lazy">
               </div>
               <button class="carrusel-flecha anterior" type="button" aria-label="Foto anterior">‹</button>
               <button class="carrusel-flecha siguiente" type="button" aria-label="Foto siguiente">›</button>
@@ -156,7 +176,7 @@
             <button class="boton-producto" data-producto="Ancheta con rosas, vino pequeño y 9 chocolates">Quiero este producto ↗</button>
           </div>
         </article>
-        <!-- PRODUCTO 8 -->
+
         <article class="producto">
           <div class="producto-imagen imagen-8">
             <img src="ancheta oso cafe arequipe1.jpeg" alt="Ancheta pequeña con fresas, vino y caja de madera" loading="lazy">
@@ -168,13 +188,13 @@
             <button class="boton-producto" data-producto="Ancheta pequeña con fresas, vino y caja de madera">Quiero este producto ↗</button>
           </div>
         </article>
-        <!-- PRODUCTO 9: CARRUSEL -->
+
         <article class="producto">
           <div class="producto-imagen imagen-9">
             <div class="carrusel" data-carrusel aria-label="Fotos de ancheta con dos corazones">
               <div class="carrusel-pista">
-                <img src="Ancheta con 2 corazones1.jpeg" alt="Ancheta con dos corazones, foto 1" loading="lazy">
-                <img src="ancheta con 2 corazones 2.jpeg" alt="Ancheta con dos corazones, foto 2" loading="lazy">
+                <img src="Ancheta con 2 corazones1.jpeg" alt="Ancheta con dos corazones, fresas y base de madera, foto 1" loading="lazy">
+                <img src="ancheta con 2 corazones 2.jpeg" alt="Ancheta con dos corazones, fresas y base de madera, foto 2" loading="lazy">
               </div>
               <button class="carrusel-flecha anterior" type="button" aria-label="Foto anterior">‹</button>
               <button class="carrusel-flecha siguiente" type="button" aria-label="Foto siguiente">›</button>
@@ -188,13 +208,13 @@
             <button class="boton-producto" data-producto="Ancheta con 2 corazones, fresas y base de madera">Quiero este producto ↗</button>
           </div>
         </article>
-        <!-- PRODUCTO 10: CARRUSEL -->
+
         <article class="producto">
           <div class="producto-imagen imagen-10">
             <div class="carrusel" data-carrusel aria-label="Fotos de bandeja decorada">
               <div class="carrusel-pista">
-                <img src="Bandeja decorada con vino, café, arequipe y oso.jpeg" alt="Bandeja decorada, foto 1" loading="lazy">
-                <img src="Bandeja decorada con vino, café, arequipe y oso2.jpeg" alt="Bandeja decorada, foto 2" loading="lazy">
+                <img src="Bandeja decorada con vino, café, arequipe y oso.jpeg" alt="Bandeja decorada con vino, café, arequipe y oso, foto 1" loading="lazy">
+                <img src="Bandeja decorada con vino, café, arequipe y oso2.jpeg" alt="Bandeja decorada con vino, café, arequipe y oso, foto 2" loading="lazy">
               </div>
               <button class="carrusel-flecha anterior" type="button" aria-label="Foto anterior">‹</button>
               <button class="carrusel-flecha siguiente" type="button" aria-label="Foto siguiente">›</button>
@@ -208,14 +228,14 @@
             <button class="boton-producto" data-producto="Bandeja decorada con vino, café, arequipe y oso">Quiero este producto ↗</button>
           </div>
         </article>
-        <!-- PRODUCTO 11: CARRUSEL -->
+
         <article class="producto">
           <div class="producto-imagen imagen-11">
             <div class="carrusel" data-carrusel aria-label="Fotos de ancheta con rosas eternas">
               <div class="carrusel-pista">
-                <img src="Ancheta con rosas eternas1.jpeg" alt="Ancheta con rosas eternas, foto 1" loading="lazy">
-                <img src="Ancheta con rosas eternas2.jpeg" alt="Ancheta con rosas eternas, foto 2" loading="lazy">
-                <img src="Ancheta rosas eternas3.jpeg" alt="Ancheta con rosas eternas, foto 3" loading="lazy">
+                <img src="Ancheta con rosas eternas1.jpeg" alt="Ancheta con rosas eternas y caja de chocolate en madera, foto 1" loading="lazy">
+                <img src="Ancheta con rosas eternas2.jpeg" alt="Ancheta con rosas eternas y caja de chocolate en madera, foto 2" loading="lazy">
+                <img src="Ancheta rosas eternas3.jpeg" alt="Ancheta con rosas eternas y caja de chocolate en madera, foto 3" loading="lazy">
               </div>
               <button class="carrusel-flecha anterior" type="button" aria-label="Foto anterior">‹</button>
               <button class="carrusel-flecha siguiente" type="button" aria-label="Foto siguiente">›</button>
@@ -229,13 +249,13 @@
             <button class="boton-producto" data-producto="Ancheta con rosas eternas y caja de chocolate en madera">Quiero este producto ↗</button>
           </div>
         </article>
-        <!-- PRODUCTO 12: CARRUSEL -->
+
         <article class="producto">
           <div class="producto-imagen imagen-12">
             <div class="carrusel" data-carrusel aria-label="Fotos de ancheta con yeso de la Virgen">
               <div class="carrusel-pista">
-                <img src="Ancheta con yeso1.jpeg" alt="Ancheta con yeso de la Virgen, foto 1" loading="lazy">
-                <img src="Ancheta con yeso 2.jpeg" alt="Ancheta con yeso de la Virgen, foto 2" loading="lazy">
+                <img src="Ancheta con yeso1.jpeg" alt="Ancheta con yeso de la Virgen y rosas eternas, foto 1" loading="lazy">
+                <img src="Ancheta con yeso 2.jpeg" alt="Ancheta con yeso de la Virgen y rosas eternas, foto 2" loading="lazy">
               </div>
               <button class="carrusel-flecha anterior" type="button" aria-label="Foto anterior">‹</button>
               <button class="carrusel-flecha siguiente" type="button" aria-label="Foto siguiente">›</button>
@@ -249,7 +269,7 @@
             <button class="boton-producto" data-producto="Ancheta con yeso de la Virgen y rosas eternas">Quiero este producto ↗</button>
           </div>
         </article>
-        <!-- PRODUCTO 13 -->
+
         <article class="producto">
           <div class="producto-imagen imagen-13">
             <img src="Rec fresa1.jpeg" alt="Recordatorios para eventos con fresa cubierta de chocolate" loading="lazy">
@@ -261,13 +281,13 @@
             <button class="boton-producto" data-producto="Recordatorios para eventos con fresa cubierta de chocolate">Quiero este producto ↗</button>
           </div>
         </article>
-        <!-- PRODUCTO 14: CARRUSEL -->
+
         <article class="producto">
           <div class="producto-imagen imagen-14">
             <div class="carrusel" data-carrusel aria-label="Fotos de recordatorios con relleno especial">
               <div class="carrusel-pista">
-                <img src="Rec con relleno.jpeg" alt="Recordatorios con relleno, foto 1" loading="lazy">
-                <img src="rec con relleno 2.jpeg" alt="Recordatorios con relleno, foto 2" loading="lazy">
+                <img src="Rec con relleno.jpeg" alt="Recordatorios con relleno especial, foto 1" loading="lazy">
+                <img src="rec con relleno 2.jpeg" alt="Recordatorios con relleno especial, foto 2" loading="lazy">
               </div>
               <button class="carrusel-flecha anterior" type="button" aria-label="Foto anterior">‹</button>
               <button class="carrusel-flecha siguiente" type="button" aria-label="Foto siguiente">›</button>
@@ -281,7 +301,7 @@
             <button class="boton-producto" data-producto="Recordatorios para eventos (bombones, chocorazones, etc.) con relleno especial">Quiero este producto ↗</button>
           </div>
         </article>
-        <!-- PRODUCTO 15 -->
+
         <article class="producto">
           <div class="producto-imagen imagen-15">
             <img src="recordatorio empresarial1.jpeg" alt="Recordatorio de chocorazones decorados sin relleno" loading="lazy">
@@ -293,13 +313,13 @@
             <button class="boton-producto" data-producto="Recordatorio de chocorazones decorados sin relleno">Quiero este producto ↗</button>
           </div>
         </article>
-        <!-- PRODUCTO 16: CARRUSEL -->
+
         <article class="producto">
           <div class="producto-imagen imagen-16">
             <div class="carrusel" data-carrusel aria-label="Fotos de ramo de chocorazones">
               <div class="carrusel-pista">
-                <img src="Ramo chocorazones1.jpeg" alt="Ramo de chocorazones, foto 1" loading="lazy">
-                <img src="ramo chocorazones 2.jpeg" alt="Ramo de chocorazones, foto 2" loading="lazy">
+                <img src="Ramo chocorazones1.jpeg" alt="Ramo de chocorazones sin relleno, foto 1" loading="lazy">
+                <img src="ramo chocorazones 2.jpeg" alt="Ramo de chocorazones sin relleno, foto 2" loading="lazy">
               </div>
               <button class="carrusel-flecha anterior" type="button" aria-label="Foto anterior">‹</button>
               <button class="carrusel-flecha siguiente" type="button" aria-label="Foto siguiente">›</button>
@@ -313,7 +333,7 @@
             <button class="boton-producto" data-producto="Ramo de chocorazones sin relleno">Quiero este producto ↗</button>
           </div>
         </article>
-        <!-- PRODUCTO 17: CAJA DE CHOCOLATES FINOS -->
+
         <article class="producto">
           <div class="producto-imagen imagen-17">
             <div class="carrusel" data-carrusel aria-label="Fotos de caja de chocolates finos">
@@ -334,10 +354,10 @@
             <button class="boton-producto" data-producto="Caja de chocolates finos">Quiero este producto ↗</button>
           </div>
         </article>
-        <!-- PRODUCTO 18: ANCHETA DE FRUTOS SECOS -->
+
         <article class="producto">
           <div class="producto-imagen imagen-18">
-            <img src="Ancheta chocolate de frutos secos1.jpeg" alt="Ancheta chocolate de frutos secos, rosas, oso de peluche, vino pequeño y vela de chocolate" loading="lazy">
+            <img src="Ancheta chocolate de frutos secos1.jpeg" alt="Ancheta de chocolate de frutos secos, rosas, oso de peluche, vino pequeño y vela de chocolate" loading="lazy">
           </div>
           <div class="producto-info">
             <p class="producto-categoria">ANCHETAS</p>
@@ -346,18 +366,21 @@
             <button class="boton-producto" data-producto="Ancheta chocolate de frutos secos, rosas, oso de peluche, vino pequeño y vela de chocolate">Quiero este producto ↗</button>
           </div>
         </article>
+
       </div>
     </section>
+
     <section class="seccion rellenos" id="rellenos">
       <p class="etiqueta">PERSONALIZA TU EXPERIENCIA</p>
       <h2>Nuestros rellenos especiales</h2>
       <p class="intro-seccion">Escoge el sabor que hará único tu chocolate.</p>
+
       <div class="rellenos-grid">
         <article class="relleno"><span>01</span><p>Limón (Pie de Limón)</p><small>Frescura cítrica con el equilibrio perfecto entre dulce y ácido.</small></article>
         <article class="relleno"><span>02</span><p>Maracuyá Premium</p><small>Sabor tropical e intenso, con el toque exótico de la fruta natural.</small></article>
         <article class="relleno"><span>03</span><p>Fresa Natural</p><small>Dulzura frutal y delicada, preparada con fruta seleccionada.</small></article>
         <article class="relleno"><span>04</span><p>Nutella con Almendras</p><small>Cremosidad de la avellana acompañada con la textura refinada de la almendra.</small></article>
-        <article class="relleno"><span>05</span><p>Oreo Cookies & Cream</p><small>Textura crujiente y suave crema, una combinación irresistible.</small></article>
+        <article class="relleno"><span>05</span><p>Oreo Cookies &amp; Cream</p><small>Textura crujiente y suave crema, una combinación irresistible.</small></article>
         <article class="relleno"><span>06</span><p>Chocolate Semiamargo Intenso</p><small>Carácter profundo y refinado, para los amantes del cacao auténtico.</small></article>
         <article class="relleno"><span>07</span><p>Coco (Beijinho)</p><small>Sabor suave y tropical, con la esencia tradicional del coco.</small></article>
         <article class="relleno"><span>08</span><p>Café con Arequipe</p><small>La intensidad del café colombiano unida a la dulzura del arequipe.</small></article>
@@ -366,16 +389,25 @@
         <article class="relleno"><span>11</span><p>Chocomaní (Chocolate con Maní)</p><small>Cremosidad y el toque tostado del maní, una combinación llena de carácter.</small></article>
       </div>
     </section>
+
     <section class="seccion pedidos" id="pedidos">
       <div class="pedido-texto">
         <p class="etiqueta">HABLEMOS DE TU IDEA</p>
         <h2>Hagamos un detalle inolvidable.</h2>
-        <p>Cuéntanos qué te gustaría regalar. Te contactaremos por WhatsApp para confirmar disponibilidad, detalles y precio final.</p>
-        <p class="nota-pedido">Para garantizar la frescura y calidad de cada pieza, los pedidos deben reservarse con anticipación. Consulta la disponibilidad al escribirnos.</p>
+        <p>
+          Cuéntanos qué te gustaría regalar. Te contactaremos por WhatsApp
+          para confirmar disponibilidad, detalles y precio final.
+        </p>
+        <p class="nota-pedido">
+          Para garantizar la frescura y calidad de cada pieza, los pedidos
+          deben reservarse con anticipación. Consulta la disponibilidad al escribirnos.
+        </p>
       </div>
+
       <form class="formulario" id="formulario-pedido">
         <label for="nombre">Tu nombre</label>
         <input type="text" id="nombre" name="nombre" placeholder="¿Cómo te llamas?" required>
+
         <label for="producto">¿Qué producto te interesa?</label>
         <select id="producto" name="producto" required>
           <option value="" selected disabled>Selecciona un producto</option>
@@ -399,6 +431,7 @@
           <option value="Ancheta chocolate de frutos secos, rosas, oso de peluche, vino pequeño y vela de chocolate">Ancheta chocolate de frutos secos, rosas, oso de peluche, vino pequeño y vela de chocolate — $120.000</option>
           <option value="Otro producto o diseño personalizado">Otro producto o diseño personalizado</option>
         </select>
+
         <div class="campo-oculto" id="opcion-vino">
           <label for="tamano-vino">Tamaño del vino</label>
           <select id="tamano-vino" name="tamano-vino">
@@ -408,6 +441,7 @@
             <option value="Grande">Grande</option>
           </select>
         </div>
+
         <label for="relleno">Relleno (si aplica)</label>
         <select id="relleno" name="relleno">
           <option value="">Sin preferencia / no aplica</option>
@@ -415,7 +449,7 @@
           <option>Maracuyá Premium</option>
           <option>Fresa Natural</option>
           <option>Nutella con Almendras</option>
-          <option>Oreo Cookies & Cream</option>
+          <option>Oreo Cookies &amp; Cream</option>
           <option>Chocolate Semiamargo Intenso</option>
           <option>Coco (Beijinho)</option>
           <option>Café con Arequipe</option>
@@ -423,13 +457,16 @@
           <option>Pistacho Cremoso</option>
           <option>Chocomaní (Chocolate con Maní)</option>
         </select>
+
         <label for="comentarios">Detalles adicionales</label>
         <textarea id="comentarios" name="comentarios" rows="4" placeholder="Fecha, colores, personalización, cantidad..."></textarea>
+
         <button class="boton boton-dorado boton-enviar" type="submit">Enviar pedido por WhatsApp</button>
         <p class="aviso-formulario">Se abrirá WhatsApp con los detalles de tu solicitud.</p>
       </form>
     </section>
   </main>
+
   <footer class="pie">
     <a class="logo logo-pie" href="#inicio" aria-label="Alborada, volver al inicio">
       <img src="logo.jpeg" alt="Logo de Alborada" class="logo-imagen logo-imagen-pie">
@@ -443,5 +480,13 @@
     </div>
     <p class="copyright">© <span id="anio"></span> Alborada. Todos los derechos reservados.</p>
   </footer>
+
+  <!-- Visor único para ampliar las fotografías -->
+  <div id="visor-imagenes" role="dialog" aria-modal="true" aria-label="Fotografía ampliada del producto" aria-hidden="true">
+    <button type="button" class="visor-cerrar" aria-label="Cerrar fotografía ampliada">&times;</button>
+    <img class="visor-foto" src="" alt="">
+    <p class="visor-descripcion">Haz clic fuera de la imagen o pulsa Esc para cerrar</p>
+  </div>
+
 </body>
 </html>
