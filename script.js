@@ -183,16 +183,25 @@ document.body.appendChild(visor);
 const imagenVisor = visor.querySelector('img');
 const botonCerrar = visor.querySelector('.cerrar');
 
-// Abrir al hacer clic en cualquier imagen de producto
-document.querySelectorAll('.producto-imagen img').forEach(img => {
-  img.style.cursor = 'zoom-in';
-  img.addEventListener('click', () => {
-    imagenVisor.src = img.src;
-    imagenVisor.alt = img.alt;
-    visor.classList.add('activo');
-    document.body.style.overflow = 'hidden'; // Bloquear desplazamiento
-  });
-});
+// ========== EFECTO AMPLIAR IMAGEN AL HACER CLIC ==========
+const visor = document.createElement('div');
+visor.className = 'visor-imagen';
+visor.innerHTML = `
+  <span class="cerrar">&times;</span>
+  <img src="" alt="Imagen ampliada">
+`;
+document.body.appendChild(visor);
+
+const imagenVisor = visor.querySelector('img');
+const botonCerrar = visor.querySelector('.cerrar');
+
+// Función para abrir la imagen
+function abrirImagen(src, alt) {
+  imagenVisor.src = src;
+  imagenVisor.alt = alt;
+  visor.classList.add('activo');
+  document.body.style.overflow = 'hidden';
+}
 
 // Cerrar
 function cerrarVisor() {
@@ -200,6 +209,28 @@ function cerrarVisor() {
   document.body.style.overflow = '';
 }
 
+// Asignar clic a TODAS las imágenes de productos
+function asignarClicImagenes() {
+  // Imágenes normales
+  document.querySelectorAll('.producto-imagen > img').forEach(img => {
+    img.style.cursor = 'zoom-in';
+    img.addEventListener('click', () => abrirImagen(img.src, img.alt));
+  });
+
+  // Imágenes dentro de carruseles
+  document.querySelectorAll('.carrusel-pista img').forEach(img => {
+    img.style.cursor = 'zoom-in';
+    img.addEventListener('click', (e) => {
+      e.stopPropagation(); // Evitar que se confunda con el movimiento del carrusel
+      abrirImagen(img.src, img.alt);
+    });
+  });
+}
+
+// Ejecutar al cargar la página
+document.addEventListener('DOMContentLoaded', asignarClicImagenes);
+
+// Eventos de cierre
 botonCerrar.addEventListener('click', cerrarVisor);
 visor.addEventListener('click', (e) => {
   if (e.target === visor) cerrarVisor();
