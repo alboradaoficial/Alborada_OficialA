@@ -796,14 +796,3 @@ h3 {
   display: none;
 }
 
-.hero-logo {
-  display: block;
-  width: 55%;
-  max-width: 220px;
-  max-height: 220px;
-  height: auto;
-  object-fit: contain;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-}
