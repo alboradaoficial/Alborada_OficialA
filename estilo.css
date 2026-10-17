@@ -887,3 +887,19 @@ body.visor-abierto {
     transition-duration: .01ms !important;
   }
 }
+
+/* Logo en portada — reemplaza el círculo */
+.logo-hero {
+  display: block;
+  max-width: 380px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Ajuste en celular */
+@media (max-width: 650px) {
+  .logo-hero {
+    max-width: 260px;
+  }
+}
