@@ -798,8 +798,9 @@ h3 {
 
 .hero-logo {
   display: block;
-  width: 100%;
-  max-width: 380px;
+  width: 55%;
+  max-width: 220px;
+  max-height: 220px;
   height: auto;
   object-fit: contain;
   border-radius: 0;
