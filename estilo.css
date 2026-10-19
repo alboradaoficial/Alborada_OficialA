@@ -903,3 +903,79 @@ body.visor-abierto {
     max-width: 260px;
   }
 }
+
+/* === PIE DE PÁGINA === */
+.pie-pagina {
+  background: #241711;
+  color: var(--crema);
+  padding: 50px 7% 25px;
+}
+
+.pie-contenido {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto 25px;
+}
+
+.pie-marca h2 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: var(--dorado);
+}
+
+.pie-marca p {
+  color: #D8C8B9;
+  font-size: 0.95rem;
+}
+
+.pie-redes h3 {
+  font-family: "DM Sans", Arial, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 18px;
+  color: var(--dorado);
+}
+
+.iconos-redes {
+  display: flex;
+  gap: 18px;
+}
+
+.iconos-redes a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  font-size: 22px;
+  transition: all 0.25s ease;
+}
+
+.iconos-redes a:hover {
+  background: var(--dorado);
+  transform: translateY(-3px);
+}
+
+.copyright {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.78rem;
+  color: #998F80;
+}
+
+@media (max-width: 650px) {
+  .pie-contenido {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .iconos-redes {
+    justify-content: center;
+  }
+}
