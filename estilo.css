@@ -992,11 +992,12 @@ body.visor-abierto {
   justify-content: center;
   background: #25D366;
   color: white;
-  font-size: 28px;
+  font-size: 32px;
   border-radius: 50%;
   box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
   z-index: 999;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
+  text-decoration: none;
 }
 
 .boton-whatsapp-flotante:hover {
@@ -1008,7 +1009,7 @@ body.visor-abierto {
   .boton-whatsapp-flotante {
     width: 54px;
     height: 54px;
-    font-size: 24px;
+    font-size: 28px;
     right: 15px;
     bottom: 20px;
   }
